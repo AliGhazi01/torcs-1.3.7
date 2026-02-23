@@ -79,9 +79,9 @@ TorcsMainMenuInit(void)
 			 "Race", "Races Menu",
 			 ReSinglePlayerInit(menuHandle), GfuiScreenActivate);
 
-    GfuiMenuButtonCreate(menuHandle,
-			 "Configure Players", "Players configuration menu",
-			 TorcsDriverMenuInit(menuHandle), GfuiScreenActivate);
+    // GfuiMenuButtonCreate(menuHandle,
+		// 	 "Configure Players", "Players configuration menu",
+		// 	 TorcsDriverMenuInit(menuHandle), GfuiScreenActivate);
 
     GfuiMenuButtonCreate(menuHandle,
 			 "Options", "Configure",
