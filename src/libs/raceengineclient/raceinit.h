@@ -32,6 +32,8 @@ extern void ReInit(void);
 extern void ReShutdown(void);
 extern void ReStartNewRace(void * /* dummy */);
 extern void ReAddRacemanListButton(void *menuHandle);
+extern void ReSelectQuickRace(void);
+extern void ReSelectQuickRaceWithMenu(void *menuHandle);
 extern int  ReInitCars(void);
 extern int  ReInitTrack(void);
 extern void ReRaceCleanup(void);

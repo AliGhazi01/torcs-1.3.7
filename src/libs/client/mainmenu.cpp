@@ -22,6 +22,7 @@
 #include <tgfclient.h>
 #include <singleplayer.h>
 #include <driverconfig.h>
+#include <raceinit.h>
 
 #include "mainmenu.h"
 #include "exitmenu.h"
@@ -37,6 +38,17 @@ TorcsMainMenuActivate(void * /* dummy */)
 	if (RacemanModLoaded != NULL) {
 		GfModUnloadList(&RacemanModLoaded);
 	}
+}
+
+/* Callback for quick race button */
+static void
+TorcsQuickRaceButtonCallback(void * /* dummy */)
+{
+	/* Initialize race engine */
+	ReInit();
+	
+	/* Select quick race configuration with menu context */
+	ReSelectQuickRaceWithMenu(menuHandle);
 }
 
 /*
@@ -76,8 +88,8 @@ TorcsMainMenuInit(void)
 		    0);
 
     GfuiMenuButtonCreate(menuHandle,
-			 "Race", "Races Menu",
-			 ReSinglePlayerInit(menuHandle), GfuiScreenActivate);
+			 "Race", "Quick Race",
+			 NULL, TorcsQuickRaceButtonCallback);
 
     // GfuiMenuButtonCreate(menuHandle,
 		// 	 "Configure Players", "Players configuration menu",

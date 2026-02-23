@@ -293,6 +293,78 @@ void ReAddRacemanListButton(void *menuHandle)
 }
 
 
+/* Load and select quick race directly */
+void
+ReSelectQuickRace(void)
+{
+	const int BUFSIZE = 1024;
+	char buf[BUFSIZE];
+	void *qrParams;
+	char *s, *e, *m;
+
+	/* Load quickrace.xml from config/raceman */
+	snprintf(buf, BUFSIZE, "%sconfig/raceman/quickrace.xml", GetLocalDir());
+	qrParams = GfParmReadFile(buf, GFPARM_RMODE_STD);
+	
+	if (!qrParams) {
+		GfOut("Unable to load quickrace.xml\n");
+		return;
+	}
+
+	/* Call the internal reSelectRaceman function logic */
+	ReInfo->params = qrParams;
+	FREEZ(ReInfo->_reFilename);
+
+	s = GfParmGetFileName(qrParams);
+	while ((m = strstr(s, "/")) != 0) {
+		s = m + 1;
+	}
+
+	e = strstr(s, PARAMEXT);
+	ReInfo->_reFilename = strndup(s, e-s+1);
+	ReInfo->_reFilename[e-s] = '\0';
+	ReInfo->_reName = GfParmGetStr(qrParams, RM_SECT_HEADER, RM_ATTR_NAME, "");
+	ReStateApply(RE_STATE_CONFIG);
+}
+
+
+/* Load and select quick race with menu context */
+void
+ReSelectQuickRaceWithMenu(void *menuHandle)
+{
+	const int BUFSIZE = 1024;
+	char buf[BUFSIZE];
+	void *qrParams;
+	char *s, *e, *m;
+
+	/* Load quickrace.xml from config/raceman */
+	snprintf(buf, BUFSIZE, "%sconfig/raceman/quickrace.xml", GetLocalDir());
+	qrParams = GfParmReadFile(buf, GFPARM_RMODE_STD);
+	
+	if (!qrParams) {
+		GfOut("Unable to load quickrace.xml\n");
+		return;
+	}
+
+	/* Set the menu screen for returning from race */
+	ReInfo->_reMenuScreen = menuHandle;
+
+	/* Call the internal reSelectRaceman function logic */
+	ReInfo->params = qrParams;
+	FREEZ(ReInfo->_reFilename);
+
+	s = GfParmGetFileName(qrParams);
+	while ((m = strstr(s, "/")) != 0) {
+		s = m + 1;
+	}
+
+	e = strstr(s, PARAMEXT);
+	ReInfo->_reFilename = strndup(s, e-s+1);
+	ReInfo->_reFilename[e-s] = '\0';
+	ReInfo->_reName = GfParmGetStr(qrParams, RM_SECT_HEADER, RM_ATTR_NAME, "");
+	ReStateApply(RE_STATE_CONFIG);
+}
+
 
 /*
  * Function
