@@ -1,1 +1,1 @@
-/home/roboy/torcs/torcs-1.3.7/src/libs/tgfclient/screen_properties.h
+/home/aligh/repos/torcs-1.3.7/src/libs/tgfclient/screen_properties.h
