@@ -134,7 +134,8 @@ reConfigRunState(void)
 	GfOut("Configuration step %s\n", conf);
 	if (!strcmp(conf, RM_VAL_TRACKSEL)) {
 		/* Track Select Menu */
-		ts.nextScreen = reConfigHookInit();
+		// ts.nextScreen = reConfigHookInit();
+		ts.nextScreen = racemanMenuHdle;
 		if (curConf == 1) {
 			ts.prevScreen = racemanMenuHdle;
 		} else {
@@ -273,7 +274,7 @@ ReRacemanMenu(void)
 			NULL, ReStartNewRace);
 
 	GfuiMenuButtonCreate(racemanMenuHdle, 
-			"Configure Race", "Configure The Race",
+			"Track Select", "Select the Track",
 			NULL, reConfigureMenu);
 
 /*     GfuiMenuButtonCreate(racemanMenuHdle, */
